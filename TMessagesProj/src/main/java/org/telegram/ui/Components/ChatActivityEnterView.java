@@ -49,6 +49,7 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.util.Property;
 import android.util.TypedValue;
 import android.view.ActionMode;
@@ -824,7 +825,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
             bigWaveDrawable.maxRadius = AndroidUtilities.dp(55);
             bigWaveDrawable.generateBlob();
 
-            lockOutlinePaint.setStyle(Paint.Style.STROKE);
+            /*lockOutlinePaint.setStyle(Paint.Style.STROKE);
             lockOutlinePaint.setStrokeCap(Paint.Cap.ROUND);
             lockOutlinePaint.setStrokeWidth(AndroidUtilities.dpf2(1.7f));
 
@@ -832,7 +833,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
             lockShadowDrawable.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chat_messagePanelVoiceLockShadow), PorterDuff.Mode.MULTIPLY));
             tooltipBackground = Theme.createRoundRectDrawable(AndroidUtilities.dp(5), Theme.getColor(Theme.key_chat_gifSaveHintBackground));
 
-            tooltipPaint.setTextSize(AndroidUtilities.dp(14));
+            tooltipPaint.setTextSize(AndroidUtilities.dp(14));*/
             tooltipBackgroundArrow = ContextCompat.getDrawable(context, R.drawable.tooltip_arrow);
             tooltipMessage = LocaleController.getString("SlideUpToLock", R.string.SlideUpToLock);
             iconScale = 1f;
@@ -1339,12 +1340,12 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
             canvas.scale(s, s, cx, lockMiddleY);
 
             rectF.set(cx - AndroidUtilities.dpf2(18), lockY, cx + AndroidUtilities.dpf2(18), lockY + lockSize);
-            lockShadowDrawable.setBounds(
+            /*lockShadowDrawable.setBounds(
                     (int) (rectF.left - AndroidUtilities.dpf2(3)), (int) (rectF.top - AndroidUtilities.dpf2(3)),
                     (int) (rectF.right + AndroidUtilities.dpf2(3)), (int) (rectF.bottom + AndroidUtilities.dpf2(3))
             );
-            lockShadowDrawable.draw(canvas);
-            canvas.drawRoundRect(rectF, AndroidUtilities.dpf2(18), AndroidUtilities.dpf2(18), lockBackgroundPaint);
+            lockShadowDrawable.draw(canvas);*/
+            //canvas.drawRoundRect(rectF, AndroidUtilities.dpf2(18), AndroidUtilities.dpf2(18), lockBackgroundPaint);
             pauseRect.set(rectF);
 
             rectF.set(
@@ -1359,10 +1360,10 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
             canvas.save();
             canvas.translate(0, AndroidUtilities.dpf2(2) * (1f - moveProgress));
             canvas.rotate(lockRotation, locCx, locCy);
-            canvas.drawRoundRect(rectF, AndroidUtilities.dpf2(3), AndroidUtilities.dpf2(3), lockPaint);
+            //canvas.drawRoundRect(rectF, AndroidUtilities.dpf2(3), AndroidUtilities.dpf2(3), lockPaint);
 
             if (transformToPauseProgress != 1) {
-                canvas.drawCircle(locCx, locCy, AndroidUtilities.dpf2(2) * (1f - transformToPauseProgress), lockBackgroundPaint);
+                //canvas.drawCircle(locCx, locCy, AndroidUtilities.dpf2(2) * (1f - transformToPauseProgress), lockBackgroundPaint);
             }
 
             if (transformToPauseProgress != 1f) {
@@ -1373,20 +1374,20 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                 if (lockRotation > 0) {
                     canvas.rotate(lockRotation, AndroidUtilities.dp(8), AndroidUtilities.dp(8));
                 }
-                canvas.drawLine(AndroidUtilities.dpf2(8), AndroidUtilities.dpf2(4), AndroidUtilities.dpf2(8), AndroidUtilities.dpf2(6) + AndroidUtilities.dpf2(4) * (1f - transformToPauseProgress), lockOutlinePaint);
-                canvas.drawArc(rectF, 0, -180, false, lockOutlinePaint);
-                canvas.drawLine(
+                //canvas.drawLine(AndroidUtilities.dpf2(8), AndroidUtilities.dpf2(4), AndroidUtilities.dpf2(8), AndroidUtilities.dpf2(6) + AndroidUtilities.dpf2(4) * (1f - transformToPauseProgress), lockOutlinePaint);
+                //canvas.drawArc(rectF, 0, -180, false, lockOutlinePaint);
+                /*canvas.drawLine(
                         0, AndroidUtilities.dpf2(4),
                         0, AndroidUtilities.dpf2(4) + AndroidUtilities.dpf2(4) * idleProgress * (moveProgress) * (isSendButtonVisible() ? 0 : 1) + AndroidUtilities.dpf2(4) * snapAnimationProgress * (1f - moveProgress),
                         lockOutlinePaint
-                );
+                );*/
                 canvas.restore();
             }
             canvas.restore();
             canvas.restore();
 
             if (scale != 1f) {
-                canvas.drawCircle(cx + slideDelta, cy, radius, paint);
+                //canvas.drawCircle(cx + slideDelta, cy, radius, paint);
                 float a = (canceledByGesture ? (1f - slideToCancelProgress) : 1);
                 canvas.save();
                 canvas.translate(slideDelta, 0);
@@ -2326,6 +2327,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
         audioVideoButtonContainer.setOnTouchListener((view, motionEvent) -> {
             //added
             setRecordVideoButtonVisible(true, true);
+            recordingAudioVideo = false;
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 if (recordCircle.isSendButtonVisible()) {
                     if (!hasRecordVideo || calledRecordRunnable) {
@@ -2429,18 +2431,18 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                         }, 500);
                     }
                 }
-            } else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE && recordingAudioVideo) {
+            } else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE && true) {
                 float x = motionEvent.getX();
                 float y = motionEvent.getY();
                 if (recordCircle.isSendButtonVisible()) {
                     return false;
                 }
-                if (recordCircle.setLockTranslation(y) == 2) {
+                /*if (recordCircle.setLockTranslation(y) == 2) {
                     startLockTransition();
                     return false;
                 } else {
                     recordCircle.setMovingCords(x, y);
-                }
+                }*/
 
                 if (startedDraggingX == -1) {
                     startedDraggingX = x;
@@ -2482,6 +2484,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
         audioVideoButtonContainer2.setOnTouchListener((view, motionEvent) -> {
             //added
             setRecordVideoButtonVisible(false, true);
+            recordingAudioVideo = false;
             distCanMove = AndroidUtilities.dp(70);
 
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
@@ -2521,7 +2524,9 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                     recordAudioVideoRunnable.run();
                 }
             } else if (motionEvent.getAction() == MotionEvent.ACTION_UP || motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
+                Log.e("UP","UP");
                 if (motionEvent.getAction() == MotionEvent.ACTION_CANCEL && recordingAudioVideo) {
+                    Log.e("UP","UP INSIDE");
                     if (recordCircle.slideToCancelProgress < 0.7f) {
                         if (hasRecordVideo && videoSendButton.getTag() != null) {
                             CameraController.getInstance().cancelOnInitRunnable(onFinishInitCameraRunnable);
@@ -2587,18 +2592,18 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                         }, 500);
                     }
                 }
-            } else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE && recordingAudioVideo) {
+            } else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE && true) {
                 float x = motionEvent.getX();
                 float y = motionEvent.getY();
                 if (recordCircle.isSendButtonVisible()) {
                     return false;
                 }
-                if (recordCircle.setLockTranslation(y) == 2) {
+                /*if (recordCircle.setLockTranslation(y) == 2) {
                     startLockTransition();
                     return false;
                 } else {
                     recordCircle.setMovingCords(x, y);
-                }
+                }*/
 
                 if (startedDraggingX == -60) {
                     startedDraggingX = x;
