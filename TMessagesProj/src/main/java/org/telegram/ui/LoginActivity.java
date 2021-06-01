@@ -266,7 +266,6 @@ public class LoginActivity extends BaseFragment {
                     String toSpeak = LocaleController.getString("SentAppCode", R.string.SentAppCode);
                     t1.setLanguage(Locale.getDefault());
                     t1.speak(LocaleController.getString("AcceptPermit", R.string.AcceptPermit), TextToSpeech.QUEUE_ADD, null);
-                    t1.speak(LocaleController.getString("StartText", R.string.StartText), TextToSpeech.QUEUE_ADD, null);
                 }
             }
         });
@@ -454,6 +453,7 @@ public class LoginActivity extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+            t1.speak(LocaleController.getString("StartText", R.string.StartText), TextToSpeech.QUEUE_ADD, null);
         if (newAccount) {
             ConnectionsManager.getInstance(currentAccount).setAppPaused(false, false);
         }
@@ -1756,7 +1756,8 @@ public class LoginActivity extends BaseFragment {
                             }
                             if (!permissionsShowItems.isEmpty()) {
                                 SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-                                if (preferences.getBoolean("firstloginshow", true) || getParentActivity().shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE)) {
+                                //if (preferences.getBoolean("firstloginshow", true) || getParentActivity().shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE)) {
+                                 if(false){
                                     preferences.edit().putBoolean("firstloginshow", false).commit();
                                     AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
                                     builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
@@ -2522,6 +2523,7 @@ public class LoginActivity extends BaseFragment {
                         params.putString("phoneHash", phoneHash);
                         params.putString("code", req.phone_code);
                         setPage(5, true, params, false);
+
                         t1.speak(LocaleController.getString("NameHelpLogin", R.string.NameHelpLogin), TextToSpeech.QUEUE_FLUSH, null);
                     } else {
                         onAuthSuccess((TLRPC.TL_auth_authorization) response);

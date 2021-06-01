@@ -2267,9 +2267,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         updateTitleIcons();
 
         if (chatMode == 0 && !isThreadChat() && reportType < 0) {
-            attachItem = menu.addItem(chat_menu_attach, R.drawable.ic_ab_other).setOverrideMenuClick(true).setAllowCloseAnimation(false);
-            attachItem.setContentDescription(LocaleController.getString("AccDescrAttachButton", R.string.AccDescrAttachButton));
-            attachItem.setVisibility(View.GONE);
+            //attachItem = menu.addItem(chat_menu_attach, R.drawable.ic_ab_other).setOverrideMenuClick(true).setAllowCloseAnimation(false);
+            //attachItem.setContentDescription(LocaleController.getString("AccDescrAttachButton", R.string.AccDescrAttachButton));
+            //attachItem.setVisibility(View.GONE);
         }
 
         actionModeViews.clear();
@@ -21978,6 +21978,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             }
                         } else {
                             if (chatActivityEnterView.canShowVoiceMessageTransition()) {
+                                Log.e("Sending","send voice message");
                                 messageCell.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
                                     @Override
                                     public boolean onPreDraw() {
@@ -21992,6 +21993,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                                     }
                                 });
                             }
+                            else{Log.e("Not Sending","send voice message");}
                         }
                     }
                     if (!animatingDocuments.isEmpty() && animatingDocuments.containsKey(message.getDocument())) {

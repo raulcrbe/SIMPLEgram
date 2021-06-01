@@ -18,7 +18,7 @@
     <string name="ChangeProfilePicture">Selecciona una foto para que tus contactos te reconozcan</string>
     <string name="NameError">Por favor, introduce un nombre</string>
     <string name="PhoneNumberError">Por favor, introduce un número de telefono</string>
-    <string name="Init">Pulsa sobre el botón azúl para iniciar la aplicación</string>
+    <string name="Init">Pulsa sobre el botón rectangular azúl de abajo para iniciar la aplicación</string>
     <string name="DialogsDescription">En la barra de arriba, al pulsar sobre el icono con la persona en el circulo puedes seleccionar una imagen para que te reconozcan tus contactos.
     Si pulsas sobre la persona con la cruz, podrás añadir un nuevo contacto.
         Si pulsas sobre uno de los chats podrás hablar con uno de tus contactos y al comenzar a hablar escucharás el nombre del contacto.
